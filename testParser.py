@@ -4,7 +4,7 @@
 # educational purposes provided that (1) you do not distribute or publish
 # solutions, (2) you retain this notice, and (3) you provide clear
 # attribution to UC Berkeley, including a link to http://ai.berkeley.edu.
-# 
+#
 # Attribution Information: The Pacman AI projects were developed at UC Berkeley.
 # The core projects and autograders were primarily created by John DeNero
 # (denero@cs.berkeley.edu) and Dan Klein (klein@cs.berkeley.edu).
@@ -14,6 +14,7 @@
 
 import re
 import sys
+
 
 class TestParser(object):
 
@@ -47,28 +48,28 @@ class TestParser(object):
         # read a property in each loop cycle
         while(i < len(lines)):
             # skip blank lines
-            if re.match('\A\s*\Z', lines[i]):
+            if re.match(r'\A\s*\Z', lines[i]):
                 test['__emit__'].append(("raw", raw_lines[i]))
                 i += 1
                 continue
-            m = re.match('\A([^"]*?):\s*"([^"]*)"\s*\Z', lines[i])
+            m = re.match(r'\A([^"]*?):\s*"([^"]*)"\s*\Z', lines[i])
             if m:
                 test[m.group(1)] = m.group(2)
                 test['__emit__'].append(("oneline", m.group(1)))
                 i += 1
                 continue
-            m = re.match('\A([^"]*?):\s*"""\s*\Z', lines[i])
+            m = re.match(r'\A([^"]*?):\s*"""\s*\Z', lines[i])
             if m:
                 msg = []
                 i += 1
-                while(not re.match('\A\s*"""\s*\Z', lines[i])):
+                while(not re.match(r'\A\s*"""\s*\Z', lines[i])):
                     msg.append(raw_lines[i])
                     i += 1
                 test[m.group(1)] = '\n'.join(msg)
                 test['__emit__'].append(("multiline", m.group(1)))
                 i += 1
                 continue
-            print 'error parsing test file: %s' % self.path
+            print('error parsing test file: %s' % self.path)
             sys.exit(1)
         return test
 
